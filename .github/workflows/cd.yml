@@ -4,7 +4,7 @@ jobs:
   cd_pipeline:
     name: "cd pipeline"
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 91
     permissions:
       contents: 'read'
       id-token: 'write'
