@@ -1,4 +1,4 @@
-name: Application CI
+name: Pipeline CI
 on: [push, pull_request]
 jobs:
   ci-pipeline:

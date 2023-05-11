@@ -1,5 +1,10 @@
 name: Pipeline CD
-on: [push, pull_request]
+on:
+  workflow_run:
+    workflows: ["Pipeline CI"]
+    branches: [main]
+    types:
+      - completed
 jobs:
   cd_pipeline:
     name: "cd pipeline"
@@ -26,13 +31,12 @@ jobs:
         run: gcloud auth login --cred-file=${{steps.auth.outputs.credentials_file_path}}
       - name: Run gcloud
         run: gcloud run services list
-      # - id: 'deploy'
-      #   uses: 'google-github-actions/deploy-cloudrun@v1'
-      #   with:
-      #     service: 'hello-cloud-run'
-      #     #image: 'us-docker.pkg.dev/cloudrun/container/hello:latest'
-      #     image: 'europe-west9-docker.pkg.dev/ambient-net-377313/demo-repo/my-sephora-cicd-demo:1.0'
-      #     region: 'europe-west9'
-      #     flags: '--allow-unauthenticated'
-      # - name: 'Use output'
-      #   run: 'curl "${{ steps.deploy.outputs.url }}"'
+      - id: 'deploy'
+        uses: 'google-github-actions/deploy-cloudrun@v1'
+        with:
+          service: 'cicd-demo'
+          image: 'europe-west9-docker.pkg.dev/s4a-cicd-poc-sbx-5b20/demo-repo/cicd-demo:latest'
+          region: 'europe-west9'
+          flags: '--allow-unauthenticated'
+      - name: 'Use output'
+        run: 'curl "${{ steps.deploy.outputs.url }}"'
