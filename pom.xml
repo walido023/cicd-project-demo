@@ -1031,7 +1031,7 @@
                                 <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                                 <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                                 <driver>com.mysql.cj.jdbc.Driver</driver>
-                                <url>jdbc:mysql://localhost:3306/cicdDemo</url>
+                                <url>jdbc:mysql:///cicdDemo?cloudSqlInstance=s4a-cicd-poc-sbx-5b20:europe-west9:cicd-demo-instance</url>
                                 <defaultSchemaName>cicdDemo</defaultSchemaName>
                                 <username>root</username>
                                 <password></password>
