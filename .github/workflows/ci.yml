@@ -43,16 +43,21 @@ jobs:
       #     npm run ci:backend:test
       # - name: Run frontend test
       #   run: npm run ci:frontend:test
-      - name: Analyze code with SonarQube
+      - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          if [ ! -z "$SONAR_TOKEN" ]; then
-              ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=walido023 -Dsonar.projectKey=walido023_cicd-project-demo
-          else
-              echo No SONAR_TOKEN, skipping...
-          fi
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=walido023_cicd-project-demo
+      # - name: Analyze code with SonarQube
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   run: |
+      #     if [ ! -z "$SONAR_TOKEN" ]; then
+      #         ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=walido023 -Dsonar.projectKey=walido023_cicd-project-demo
+      #     else
+      #         echo No SONAR_TOKEN, skipping...
+      #     fi
       - name: Package application
         run: npm run java:jar:prod
       # - name: Build and publish docker image
