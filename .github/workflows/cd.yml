@@ -31,12 +31,23 @@ jobs:
         run: gcloud auth login --cred-file=${{steps.auth.outputs.credentials_file_path}}
       - name: Run gcloud
         run: gcloud run services list
-      - id: 'deploy'
+      - name: Deploy to Cloud Run
+        id: 'deploy'
         uses: 'google-github-actions/deploy-cloudrun@v1'
         with:
           service: 'cicd-demo'
           image: 'europe-west9-docker.pkg.dev/s4a-cicd-poc-sbx-5b20/demo-repo/cicd-demo:latest'
           region: 'europe-west9'
-          flags: '--allow-unauthenticated'
+          flags: '--allow-unauthenticated --vpc-connector connecteur-sql-cloud --service-account=${{ secrets.SERVICE_ACCOUNT }}'
+      # - name: Deploy to Cloud Run
+      #   id: deploy
+      #   uses: google-github-actions/deploy-cloudrun@main
+      #   with:
+      #     region: ${{ env.REGION }}
+      #     service: 'cicd-demo'
+      #     image: ${{ env.BASE_IMAGE }}:${{ github.sha }}
+      #     credentials: ${{ secrets.GCP_SA_KEY }}
+      #     env_vars: "DATABASE_HOST=${{ env.DATABASE_IP }},DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }},DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}"
+      #     flags: "--allow-unauthenticated --vpc-connector vpc-conn --add-cloudsql-instances '${{ env.PROJECT_ID }}:${{env.REGION}}:${{env.DATABASE_INSTANCE}}'"
       - name: 'Use output'
         run: 'curl "${{ steps.deploy.outputs.url }}"'
