@@ -50,6 +50,15 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=walido023 -Dsonar.projectKey=walido023_cicd-project-demo
       - name: Package application
         run: npm run java:jar:prod
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          #files: ./coverage1.xml,./coverage2.xml # optional
+          #flags: unittests # optional
+          name: codecov-umbrella # optional
+          #fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
+
       - id: auth
         uses: google-github-actions/auth@v0.4.0
         with:
