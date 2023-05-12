@@ -1,0 +1,15 @@
+name: Pipeline CI Caller
+#on: [push, pull_request]
+on: workflow_dispatch:
+jobs:
+  call-maven-pipeline-ci:
+    name: call maven pipeline ci
+    uses: walido023/cicd-centralized-workflows-demo/.github/workflows/ci.yml@main
+    with:
+      runs-on: ubuntu-latest
+      node-version: 16.17.0
+      java-version: 11
+      sonar_organization: walido023
+      sonar_projectKey: walido023_cicd-project-demo
+    secrets:
+      SONAR_TOKEN: ${{  secretes.SONAR_TOKEN  }}
