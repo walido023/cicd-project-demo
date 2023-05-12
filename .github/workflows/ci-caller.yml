@@ -12,4 +12,4 @@ jobs:
       sonar_organization: walido023
       sonar_projectKey: walido023_cicd-project-demo
     secrets:
-      SONAR_TOKEN: ${{  secretes.SONAR_TOKEN  }}
+      SONAR_TOKEN: ${{  secrets.SONAR_TOKEN  }}
