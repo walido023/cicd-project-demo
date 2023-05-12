@@ -43,30 +43,15 @@ jobs:
           npm run ci:backend:test
       - name: Run frontend test
         run: npm run ci:frontend:test
-      - name: Build and analyze
+      - name: Analyze code with SonarQube
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         #run: ./mvnw initialize sonar:sonar org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=walido023 -Dsonar.projectKey=walido023_cicd-project-demo
+        #run: ./mvnw -Pprod clean verify sonar:sonar org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=walido023 -Dsonar.projectKey=walido023_cicd-project-demo
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=walido023 -Dsonar.projectKey=walido023_cicd-project-demo
-      # - name: Analyze code with SonarQube
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      #   run: |
-      #     if [ ! -z "$SONAR_TOKEN" ]; then
-      #         ./mvnw -ntp initialize sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=walido023 -Dsonar.projectKey=walido023_cicd-project-demo
-      #     else
-      #         echo No SONAR_TOKEN, skipping...
-      #     fi
       - name: Package application
         run: npm run java:jar:prod
-      # - name: Build and publish docker image
-      #   if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
-      #   run: |
-      #     GIT_TAG=:${GITHUB_REF#refs/tags/}
-      #     DOCKER_TAG=${GIT_TAG#:refs/heads/main}
-      #     ./mvnw -ntp jib:build -Djib.to.image=walidos023/cicd-demo${DOCKER_TAG} -Djib.to.auth.username="${{ secrets.DOCKER_USERNAME }}" -Djib.to.auth.password="${{ secrets.DOCKER_PASSWORD }}" -Pprod
       - id: auth
         uses: google-github-actions/auth@v0.4.0
         with:
@@ -88,9 +73,3 @@ jobs:
           GIT_TAG=:${GITHUB_REF#refs/tags/}
           DOCKER_TAG=${GIT_TAG#:refs/heads/main}
           ./mvnw -ntp jib:build -Djib.to.image=europe-west9-docker.pkg.dev/s4a-cicd-poc-sbx-5b20/demo-repo/cicd-demo${DOCKER_TAG}  -Pprod
-
-
-      # - name: Build with Maven
-      #   run: |
-      #     ./mvn clean deploy -DskipTests -Pprod \
-      #     -DaltReleaseDeploymentRepository=artifact-registry::default::artifactregistry://europe-west9-docker.pkg.dev/s4a-cicd-poc-sbx-5b20/demo-repo
