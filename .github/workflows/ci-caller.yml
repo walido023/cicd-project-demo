@@ -4,6 +4,9 @@ on: workflow_dispatch
 jobs:
   call-maven-pipeline-ci:
     name: call maven pipeline ci
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     uses: walido023/cicd-centralized-workflows-demo/.github/workflows/ci.yml@main
     with:
       runs-on: ubuntu-latest
