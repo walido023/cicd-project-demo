@@ -16,3 +16,4 @@ jobs:
       sonar_projectKey: walido023_cicd-project-demo
     secrets:
       SONAR_TOKEN: ${{  secrets.SONAR_TOKEN  }}
+      CODECOV_TOKEN: ${{  secrets.CODECOV_TOKEN  }}
