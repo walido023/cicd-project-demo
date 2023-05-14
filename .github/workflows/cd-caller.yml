@@ -1,0 +1,18 @@
+name: Pipeline CD Caller
+#on: [push, pull_request]
+on: workflow_dispatch
+jobs:
+  call-cloudrun-pipeline-cd:
+    name: call cloudrun pipeline cd
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    uses: walido023/cicd-centralized-workflows-demo/.github/workflows/cd.yml@main
+    with:
+      runs-on: ubuntu-latest
+      image_name: europe-west9-docker.pkg.dev/s4a-cicd-poc-sbx-5b20/demo-repo/cicd-demo
+      serverless_vpc_connector: connecteur-sql-cloud
+      cloudrun_region: europe-west9
+    secrets:
+      WORKLOAD_IDENTITY_PROVIDER_ID: ${{  secrets.WORKLOAD_IDENTITY_PROVIDER_ID  }}
+      SERVICE_ACCOUNT: ${{  secrets.SERVICE_ACCOUNT  }}
