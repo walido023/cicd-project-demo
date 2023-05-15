@@ -1,0 +1,8 @@
+{
+  "runs-on": "ubuntu-latest",
+  "node-version": "16.17.0",
+  "java-version": 11,
+  "sonar_organization": "walido023",
+  "sonar_projectKey": "walido023_cicd-project-demo",
+  "image_name": "europe-west9-docker.pkg.dev/s4a-cicd-poc-sbx-5b20/demo-repo/cicd-demo"
+}
