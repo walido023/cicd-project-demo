@@ -8,13 +8,13 @@ jobs:
       contents: 'read'
       id-token: 'write'
     uses: walido023/cicd-centralized-workflows-demo/.github/workflows/ci-with-conf.yml@main
-    with:
-      runs-on: ${{ needs.config.outputs.runs-on }}
-      node-version: ${{ needs.config.outputs.node-version }}
-      java-version: ${{ needs.config.outputs.java-version }}
-      sonar_organization: ${{ needs.config.outputs.sonar_organization }}
-      sonar_projectKey: ${{ needs.config.outputs.sonar_projectKey }}
-      image_name: ${{ needs.config.outputs.image_name }}
+    # with:
+    #   runs-on: ${{ needs.config.outputs.runs-on }}
+    #   node-version: ${{ needs.config.outputs.node-version }}
+    #   java-version: ${{ needs.config.outputs.java-version }}
+    #   sonar_organization: ${{ needs.config.outputs.sonar_organization }}
+    #   sonar_projectKey: ${{ needs.config.outputs.sonar_projectKey }}
+    #   image_name: ${{ needs.config.outputs.image_name }}
     secrets:
       SONAR_TOKEN: ${{  secrets.SONAR_TOKEN  }}
       CODECOV_TOKEN: ${{  secrets.CODECOV_TOKEN  }}
