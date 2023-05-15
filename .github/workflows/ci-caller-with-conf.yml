@@ -2,7 +2,7 @@ name: Pipeline CI Caller with json conf
 #on: [push, pull_request]
 on: workflow_dispatch
 jobs:
-  call-maven-pipeline-ci-json-conf:
+  call_maven_pipeline_ci_json_conf:
     name: call maven pipeline ci with json conf
     permissions:
       contents: 'read'
