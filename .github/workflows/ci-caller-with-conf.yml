@@ -6,7 +6,7 @@ jobs:
     permissions:
       contents: 'read'
       id-token: 'write'
-    uses: walido023/cicd-centralized-workflows-demo/.github/workflows/ci-with-conf.yml@main
+    uses: walido023/cicd-centralized-workflows-demo/.github/workflows/ci-react-node-java-maven.ymll@main
     secrets:
       SONAR_TOKEN: ${{  secrets.SONAR_TOKEN  }}
       CODECOV_TOKEN: ${{  secrets.CODECOV_TOKEN  }}
