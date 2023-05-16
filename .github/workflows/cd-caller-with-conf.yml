@@ -1,6 +1,12 @@
 name: Pipeline CD Caller with json conf
 #on: [push, pull_request]
-on: workflow_dispatch
+#on: workflow_dispatch
+on:
+  workflow_run:
+    workflows: ["Pipeline CI Caller with json conf"]
+    branches: [main]
+    types:
+      - completed
 jobs:
   call_cloudrun_pipeline_cd_with_json_conf:
     name: call cloudrun pipeline cd with json conf
