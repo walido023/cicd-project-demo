@@ -1,6 +1,4 @@
 name: Pipeline CD Caller with json conf
-#on: [push, pull_request]
-#on: workflow_dispatch
 on:
   workflow_run:
     workflows: ["Pipeline CI Caller with json conf"]
