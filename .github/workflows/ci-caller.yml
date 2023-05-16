@@ -4,6 +4,9 @@ on: workflow_dispatch
 jobs:
   call-maven-pipeline-ci:
     name: call maven pipeline ci
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     uses: walido023/cicd-centralized-workflows-demo/.github/workflows/ci.yml@main
     with:
       runs-on: ubuntu-latest
@@ -11,5 +14,9 @@ jobs:
       java-version: 11
       sonar_organization: walido023
       sonar_projectKey: walido023_cicd-project-demo
+      image_name: europe-west9-docker.pkg.dev/s4a-cicd-poc-sbx-5b20/demo-repo/cicd-demo
     secrets:
-      SONAR_TOKEN: ${{  secretes.SONAR_TOKEN  }}
+      SONAR_TOKEN: ${{  secrets.SONAR_TOKEN  }}
+      CODECOV_TOKEN: ${{  secrets.CODECOV_TOKEN  }}
+      WORKLOAD_IDENTITY_PROVIDER_ID: ${{  secrets.WORKLOAD_IDENTITY_PROVIDER_ID  }}
+      SERVICE_ACCOUNT: ${{  secrets.SERVICE_ACCOUNT  }}
