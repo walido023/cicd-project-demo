@@ -6,7 +6,8 @@ on:
         type: choice
         description: choose docker image version
         default: latest
-        options: ${GITHUB_REF#refs/tags/}
+        options: ${{ github.ref_name }}
+        # - run: echo "${GITHUB_REF#refs/tags/}"
 # on:
 #   workflow_run:
 #     workflows: ["Pipeline CI Caller with json conf"]
