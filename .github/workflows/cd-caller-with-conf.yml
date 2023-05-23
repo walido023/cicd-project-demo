@@ -1,10 +1,11 @@
 name: Pipeline CD Caller with json conf
-on:
-  workflow_run:
-    workflows: ["Pipeline CI Caller with json conf"]
-    branches: [main]
-    types:
-      - completed
+on: workflow_dispatch
+# on:
+#   workflow_run:
+#     workflows: ["Pipeline CI Caller with json conf"]
+#     branches: [main]
+#     types:
+#       - completed
 jobs:
   call_cloudrun_pipeline_cd_with_json_conf:
     name: call cloudrun pipeline cd with json conf
@@ -12,6 +13,8 @@ jobs:
       contents: 'read'
       id-token: 'write'
     uses: walido023/cicd-centralized-workflows-demo/.github/workflows/cd-cloudrun.yml@main
+    with:
+      image_version: latest
     secrets:
       WORKLOAD_IDENTITY_PROVIDER_ID: ${{  secrets.WORKLOAD_IDENTITY_PROVIDER_ID  }}
       SERVICE_ACCOUNT: ${{  secrets.SERVICE_ACCOUNT  }}
