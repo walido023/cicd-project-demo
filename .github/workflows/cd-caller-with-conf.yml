@@ -3,9 +3,10 @@ on:
   workflow_dispatch:
     inputs:
       image_version:
-        type: string
-        description: The version of the image to be deployed
+        type: choice
+        description: choose docker image version
         default: latest
+        options: ${GITHUB_REF#refs/tags/}
 # on:
 #   workflow_run:
 #     workflows: ["Pipeline CI Caller with json conf"]
