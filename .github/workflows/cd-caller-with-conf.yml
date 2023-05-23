@@ -1,5 +1,11 @@
 name: Pipeline CD Caller with json conf
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      image_version:
+        type: string
+        description: The version of the image to be deployed
+        default: latest
 # on:
 #   workflow_run:
 #     workflows: ["Pipeline CI Caller with json conf"]
@@ -14,7 +20,7 @@ jobs:
       id-token: 'write'
     uses: walido023/cicd-centralized-workflows-demo/.github/workflows/cd-cloudrun.yml@main
     with:
-      image_version: latest
+      image_version: ${{  inputs.image_version  }}
     secrets:
       WORKLOAD_IDENTITY_PROVIDER_ID: ${{  secrets.WORKLOAD_IDENTITY_PROVIDER_ID  }}
       SERVICE_ACCOUNT: ${{  secrets.SERVICE_ACCOUNT  }}
