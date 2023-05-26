@@ -80,4 +80,3 @@ jobs:
           GIT_TAG=:${GITHUB_REF#refs/tags/}
           DOCKER_TAG=${GIT_TAG#:refs/heads/main}
           ./mvnw -ntp jib:build -Djib.to.image=europe-west9-docker.pkg.dev/s4a-cicd-poc-sbx-5b20/demo-repo/cicd-demo${DOCKER_TAG}  -Pprod
-          //
