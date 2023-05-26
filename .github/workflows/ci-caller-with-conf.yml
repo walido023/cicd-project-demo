@@ -1,6 +1,5 @@
 name: Pipeline CI Caller with json conf
 on: workflow_dispatch
-# on: [push, pull_request]
 jobs:
   call_maven_pipeline_ci_json_conf:
     name: call maven pipeline ci with json conf
@@ -9,8 +8,3 @@ jobs:
       id-token: 'write'
     uses: walido023/cicd-centralized-workflows-demo/.github/workflows/ci-react-node-java-maven.yml@main
     secrets: inherit
-    # secrets:
-    #   SONAR_TOKEN: ${{  secrets.SONAR_TOKEN  }}
-    #   CODECOV_TOKEN: ${{  secrets.CODECOV_TOKEN  }}
-    #   WORKLOAD_IDENTITY_PROVIDER_ID: ${{  secrets.WORKLOAD_IDENTITY_PROVIDER_ID  }}
-    #   SERVICE_ACCOUNT: ${{  secrets.SERVICE_ACCOUNT  }}

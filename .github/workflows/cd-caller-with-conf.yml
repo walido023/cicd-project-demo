@@ -6,12 +6,6 @@ on:
         type: string
         description: choose docker image version
         default: latest
-# on:
-#   workflow_run:
-#     workflows: ["Pipeline CI Caller with json conf"]
-#     branches: [main]
-#     types:
-#       - completed
 jobs:
   call_cloudrun_pipeline_cd_with_json_conf:
     name: call cloudrun pipeline cd with json conf
@@ -21,6 +15,4 @@ jobs:
     uses: walido023/cicd-centralized-workflows-demo/.github/workflows/cd-cloudrun.yml@main
     with:
       image_version: ${{  inputs.image_version  }}
-    secrets:
-      WORKLOAD_IDENTITY_PROVIDER_ID: ${{  secrets.WORKLOAD_IDENTITY_PROVIDER_ID  }}
-      SERVICE_ACCOUNT: ${{  secrets.SERVICE_ACCOUNT  }}
+    secrets: inherit
