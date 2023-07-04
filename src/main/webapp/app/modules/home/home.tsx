@@ -17,7 +17,7 @@ export const Home = () => {
       </Col>
       <Col md="9">
         <h2>Welcome, to the CICD demo V2</h2>
-        <p className="lead">This is your homepage</p>
+        <p className="lead">This is your homepage v2</p>
         {account?.login ? (
           <div>
             <Alert color="success">You are logged in as user &quot;{account.login}&quot;.</Alert>
