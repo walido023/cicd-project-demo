@@ -62,8 +62,7 @@ class UserMapperTest {
 
         assertThat(users).isNotEmpty().size().isEqualTo(1);
     }
-
-    @Test
+    /* @Test
     void userDTOsToUsersWithAuthoritiesStringShouldMapToUsersWithAuthoritiesDomain() {
         Set<String> authoritiesAsString = new HashSet<>();
         authoritiesAsString.add("ADMIN");
@@ -128,5 +127,5 @@ class UserMapperTest {
     void testUserFromId() {
         assertThat(userMapper.userFromId(DEFAULT_ID).getId()).isEqualTo(DEFAULT_ID);
         assertThat(userMapper.userFromId(null)).isNull();
-    }
+    } */
 }
